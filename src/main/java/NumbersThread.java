@@ -17,8 +17,14 @@ public class NumbersThread extends Thread {
     public void run() {
         synchronized (map) {
             for (int i = 0; i < 1000000; i++) {
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 ThreadLocalRandom random = ThreadLocalRandom.current();
                 int temp = random.nextInt(1000);
+//                System.out.println(temp);
                 if (map.containsKey(temp)) {
                     int valueOld = map.get(temp);
                     valueOld++;
@@ -31,5 +37,4 @@ public class NumbersThread extends Thread {
             }
         }
     }
-
 }
